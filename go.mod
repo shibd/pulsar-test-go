@@ -1,6 +1,6 @@
 module pulsar-test
 
-require github.com/apache/pulsar-client-go v0.10.0-candidate-1
+require github.com/apache/pulsar-client-go v0.9.1-0.20230816081803-fbee610ddcbf
 
 require (
 	github.com/99designs/go-keychain v0.0.0-20191008050251-8e49817e8af4 // indirect
@@ -38,7 +38,7 @@ require (
 	golang.org/x/sys v0.0.0-20220204135822-1c1b9b1eba6a // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/protobuf v1.26.0 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
 )
 
 go 1.19

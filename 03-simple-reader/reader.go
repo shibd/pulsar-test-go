@@ -5,19 +5,18 @@ import (
 	"fmt"
 	"github.com/apache/pulsar-client-go/pulsar"
 	"log"
+	"pulsar-test/tools"
 )
 
 func main() {
 
-	client, err := pulsar.NewClient(pulsar.ClientOptions{URL: "pulsar://localhost:6650"})
-	if err != nil {
-		log.Fatal(err)
-	}
+	client := tools.CreateClientWithOauth2()
+	defer client.Close()
 
 	defer client.Close()
 
 	reader, err := client.CreateReader(pulsar.ReaderOptions{
-		Topic:          "my-topic",
+		Topic:          "xingcheng/xingcheng/test-topic",
 		StartMessageID: pulsar.EarliestMessageID(),
 	})
 	if err != nil {

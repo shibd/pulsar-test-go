@@ -26,9 +26,12 @@ func main() {
 	defer producer.Close()
 
 	ctx := context.Background()
+
 	for i := 0; i < 100; i++ {
 		message := &pulsar.ProducerMessage{
-			Payload: []byte(fmt.Sprintf("hello %d", i)),
+			Key:        "user-a",
+			Payload:    []byte(fmt.Sprintf("hello %d", i)),
+			SequenceID: int64(i),
 		}
 
 		producer.SendAsync(ctx, message, func(id pulsar.MessageID, message *pulsar.ProducerMessage, err error) {

@@ -21,14 +21,31 @@ import (
 	"log"
 
 	"github.com/apache/pulsar-client-go/pulsar"
+	"github.com/apache/pulsar-client-go/pulsaradmin"
 )
+
+func CreateAdminWithOauth2() pulsaradmin.Client {
+	cfg := &pulsaradmin.Config{}
+	cfg.AuthPlugin = "org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2"
+	cfg.IssuerEndpoint = "https://auth.streamnative.cloud/"
+	cfg.ClientID = "client_credentials"
+	cfg.Audience = "urn:sn:pulsar:o-5bm99:xc-poc"
+	cfg.KeyFile = "file:///Users/shibaodi/GolandProjects/pulsar-test-go/tools/admin.json"
+	cfg.WebServiceURL = "https://pc-77fa251c.aws-apse2-koala-snc.streamnative.aws.snio.cloud"
+
+	admin, err := pulsaradmin.NewClient(cfg)
+	if err != nil {
+		panic(err)
+	}
+	return admin
+}
 
 func CreateClientWithOauth2() pulsar.Client {
 	return createClientWithOauth2Config(false)
 }
 
 func CreateClientWithOauth2WithTransaction() pulsar.Client {
-	return createClientWithOauth2Config(false)
+	return createClientWithOauth2Config(true)
 }
 
 func createClientWithOauth2Config(enableTransaction bool) pulsar.Client {
